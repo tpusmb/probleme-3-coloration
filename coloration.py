@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Class add a coloration to a node
+This class add a coloration to a node
 """
 
 from __future__ import absolute_import
@@ -28,7 +28,7 @@ FOLDER_ABSOLUTE_PATH = os.path.normpath(os.path.dirname(os.path.abspath(__file__
 
 class Coloration:
     """
-    Make a graph coloration
+    This class add a coloration to a node
     """
     RED = "red"
     GREEN = "green"
@@ -44,9 +44,9 @@ class Coloration:
         """
         Add coloration to a input node
         :param node: (string) Node name to add a coloration
-        :param color: (string) coloration name. You can use the 3 constant
+        :param color: (string) coloration name. You can use this 3 constants
                     Coloration.RED, Coloration.GREEN, Coloration.BLUE
-        :return: (bool) True coloration add False the input node have already a coloration
+        :return: (bool) True coloration is add False the input node have already a coloration
         """
         if node not in self.coloration:
             self.coloration[node] = color
