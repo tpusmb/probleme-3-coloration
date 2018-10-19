@@ -32,9 +32,9 @@ FOLDER_ABSOLUTE_PATH = os.path.normpath(os.path.dirname(os.path.abspath(__file__
 def check_certificate(graph_to_test, coloration_to_test):
     """
     Function to check a coloration is a valid 3-coloration for his graph
-    :param graph_to_test: The graph we want to test
-    :param coloration_to_test: The graph's coloration
-    :return:(boolean) True if the 3-coloration is valid, False if it is not
+    :param graph_to_test: (Graph) The graph we want to test
+    :param coloration_to_test: (Coloration) The graph's coloration
+    :return: (boolean) True if the 3-coloration is valid, False if it is not
     """
 
     for node in graph_to_test.graph:
