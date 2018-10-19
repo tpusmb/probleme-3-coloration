@@ -46,7 +46,7 @@ class Coloration:
         :param node: (string) Node name to add a coloration
         :param color: (string) coloration name. You can use this 3 constants
                     Coloration.RED, Coloration.GREEN, Coloration.BLUE
-        :return: (bool) True coloration is add False the input node have already a coloration
+        :return: (bool) True coloration is added False the input node already have a coloration
         """
         if node not in self.coloration:
             self.coloration[node] = color
