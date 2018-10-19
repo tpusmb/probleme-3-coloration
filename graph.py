@@ -7,8 +7,10 @@ A file with a graph class
 
 from __future__ import absolute_import
 import os
-import timeit
+import matplotlib.pyplot as plt
+import networkx as nx
 import logging.handlers
+from coloration import Coloration
 
 PYTHON_LOGGER = logging.getLogger(__name__)
 if not os.path.exists("log"):
@@ -56,17 +58,31 @@ class Graph:
             else:
                 self.graph[node].append(node_name)
 
-    def display_graph(self):
+    def display_graph(self, coloration):
         """
-        Display the graph in the terminal
+        Display the in window
+        :param coloration: (coloration) coloration for each node
         """
-
-        PYTHON_LOGGER.info(self.graph)
+        graph_nx = nx.Graph()
+        labels = {}
+        node_color = []
+        for node in self.graph:
+            for neighbour in self.graph[node]:
+                graph_nx.add_edge(node, neighbour)
+            labels[node] = node
+            node_color.append(coloration.coloration[node])
+        nx.draw(graph_nx, node_color=node_color, labels=labels)
+        plt.axis('off')
+        plt.show()
 
 
 if __name__ == "__main__":
     g = Graph()
+    coloration = Coloration()
     g.add_node("S1", ["S2", "S3", "S4"])
-    g.display_graph()
-    g.add_node("S4", ["S5"])
-    g.display_graph()
+    g.add_node("S3", ["S2"])
+    coloration.color_node("S1", coloration.BLUE)
+    coloration.color_node("S2", coloration.RED)
+    coloration.color_node("S3", coloration.GREEN)
+    coloration.color_node("S4", coloration.GREEN)
+    g.display_graph(coloration)
