@@ -60,7 +60,7 @@ class Graph:
 
     def display_graph(self, coloration):
         """
-        Display the graph in the terminal
+        Display the in window
         :param coloration: (coloration) coloration for each node
         """
         graph_nx = nx.Graph()
