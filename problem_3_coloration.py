@@ -38,8 +38,12 @@ def check_certificate(graph_to_test, coloration_to_test):
     """
 
     for node in graph_to_test.graph:
+        color_node = coloration_to_test.get_node_color(node)
+        if color_node is None:
+            continue
         for link in graph_to_test.graph[node]:
-            if coloration_to_test.coloration[node] == coloration_to_test.coloration[link]:
+            color_link = coloration_to_test.get_node_color(link)
+            if color_link is not None and color_node == color_link:
                 return False
     return True
 

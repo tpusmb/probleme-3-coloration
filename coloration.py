@@ -54,6 +54,14 @@ class Coloration:
         else:
             return False
 
+    def get_node_color(self, node):
+        """
+        Get color of the input node
+        :param node: (String) name of the node you want to get the color
+        :return: (string) 'r' or 'g' or 'b' if the node not exist we return None
+        """
+        return None if node not in self.coloration else self.coloration[node]
+
 
 if __name__ == "__main__":
     pass
