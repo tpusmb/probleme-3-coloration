@@ -36,7 +36,7 @@ class Graph:
 
     def __init__(self, abs_path_graph_file_name=None):
         """
-        Constructor to create a graph with nothing inside
+        Constructor to create a graph with nothing inside or with a save file
         :param abs_path_graph_file_name: (string) Absolute path to the graph file name
         """
         self.graph = {}
