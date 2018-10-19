@@ -58,7 +58,6 @@ class Graph:
             else:
                 self.graph[node].append(node_name)
 
-    def display_graph(self, coloration):
     def get_nodes(self):
         """
         Function to get all nodes of the graph
@@ -67,7 +66,7 @@ class Graph:
 
         return list(self.graph.keys())
 
-    def display_graph(self):
+    def display_graph(self, coloration):
         """
         Display the in window
         :param coloration: (coloration) coloration for each node

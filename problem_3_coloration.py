@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+Main file with every problems
+"""
+
 from __future__ import absolute_import
 from graph import Graph
 from coloration import Coloration
@@ -26,6 +30,13 @@ FOLDER_ABSOLUTE_PATH = os.path.normpath(os.path.dirname(os.path.abspath(__file__
 
 
 def check_certificate(graph_to_test, coloration_to_test):
+    """
+    Function to check a coloration is a valid 3-coloration for his graph
+    :param graph_to_test: The graph we want to test
+    :param coloration_to_test: The graph's coloration
+    :return:(boolean) True if the 3-coloration is valid, False if it is not
+    """
+
     for node in graph_to_test.graph:
         for link in graph_to_test.graph[node]:
             if coloration_to_test.coloration[node] == coloration_to_test.coloration[link]:
@@ -37,7 +48,6 @@ if __name__ == "__main__":
     my_graph = Graph()
     my_graph.add_node("S1", ["S2", "S3", "S4"])
     my_graph.add_node("S2", ["S3", "S4"])
-    my_graph.display_graph()
 
     nodes = my_graph.get_nodes()
 
@@ -46,5 +56,7 @@ if __name__ == "__main__":
     my_coloration.color_node(nodes[1], Coloration.GREEN)
     my_coloration.color_node(nodes[2], Coloration.RED)
     my_coloration.color_node(nodes[3], Coloration.RED)
+
+    my_graph.display_graph(my_coloration)
 
     PYTHON_LOGGER.info(check_certificate(my_graph, my_coloration))
