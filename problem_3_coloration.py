@@ -44,6 +44,14 @@ def check_certificate(graph_to_test, coloration_to_test):
     return True
 
 
+def generate_and_test(graph):
+    """
+    Function to generate all possibles coloration of a graph and check if there is at least one valid 3-coloration
+    :param graph: (Graph) The graph we want to test
+    :return: (boolean) True if there is a valid 3-coloration for this graph, False if it's not the case
+    """
+
+
 if __name__ == "__main__":
     my_graph = Graph()
     my_graph.add_node("S1", ["S2", "S3", "S4"])
