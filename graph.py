@@ -34,12 +34,19 @@ class Graph:
     Class graph to represent a graph
     """
 
-    def __init__(self):
+    def __init__(self, abs_path_graph_file_name=None):
         """
-        Constructor to create a graph with nothing inside
+        Constructor to create a graph with nothing inside or with a save file
+        :param abs_path_graph_file_name: (string) Absolute path to the graph file name
         """
-
         self.graph = {}
+        if abs_path_graph_file_name is None:
+            return
+        with open(abs_path_graph_file_name) as file:
+            lines = file.readlines()
+            for line in lines[2:-1]:
+                node1, node2 = line.replace('\n', '').split('-')
+                self.add_node(node1, [node2])
 
     def add_node(self, node_name, links):
         """
@@ -85,12 +92,10 @@ class Graph:
 
 
 if __name__ == "__main__":
-    g = Graph()
+    g = Graph("sample_graph.txt")
     coloration = Coloration()
-    g.add_node("S1", ["S2", "S3", "S4"])
-    g.add_node("S3", ["S2"])
-    coloration.color_node("S1", coloration.BLUE)
-    coloration.color_node("S2", coloration.RED)
-    coloration.color_node("S3", coloration.GREEN)
-    coloration.color_node("S4", coloration.GREEN)
+    coloration.color_node("s1", coloration.BLUE)
+    coloration.color_node("s2", coloration.GREEN)
+    coloration.color_node("s3", coloration.RED)
+    coloration.color_node("s4", coloration.RED)
     g.display_graph(coloration)
