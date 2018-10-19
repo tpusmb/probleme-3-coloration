@@ -75,7 +75,7 @@ class Graph:
 
     def display_graph(self, coloration):
         """
-        Display the in window
+        Display the in window. Display the node in gray if is have no attributed color
         :param coloration: (coloration) coloration for each node
         """
         graph_nx = nx.Graph()
