@@ -9,7 +9,7 @@ from __future__ import absolute_import
 from graph import Graph
 from coloration import Coloration
 import os
-import timeit
+import itertools
 import logging.handlers
 
 PYTHON_LOGGER = logging.getLogger(__name__)
@@ -44,12 +44,25 @@ def check_certificate(graph_to_test, coloration_to_test):
     return True
 
 
-def generate_and_test(graph):
+def generate_and_test(graph_to_test):
     """
     Function to generate all possibles coloration of a graph and check if there is at least one valid 3-coloration
-    :param graph: (Graph) The graph we want to test
+    :param graph_to_test: (Graph) The graph we want to test
     :return: (boolean) True if there is a valid 3-coloration for this graph, False if it's not the case
     """
+
+    nb_node = len(graph_to_test.get_nodes())
+    all_color_combination = [list(combination)
+                             for combination in itertools.product([Coloration.RED,
+                                                                   Coloration.GREEN,
+                                                                   Coloration.BLUE], repeat=nb_node)]
+    for combination in all_color_combination:
+        coloration = Coloration()
+        for node, color in zip(graph_to_test.get_nodes(), combination):
+            coloration.color_node(node, color)
+        if check_certificate(graph_to_test, coloration):
+            return True
+    return False
 
 
 if __name__ == "__main__":
@@ -65,3 +78,5 @@ if __name__ == "__main__":
     my_graph.display_graph(my_coloration)
 
     PYTHON_LOGGER.info(check_certificate(my_graph, my_coloration))
+
+    PYTHON_LOGGER.info(generate_and_test(my_graph))
