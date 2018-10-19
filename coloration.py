@@ -30,9 +30,9 @@ class Coloration:
     """
     This class add a coloration to a node
     """
-    RED = "red"
-    GREEN = "green"
-    BLUE = "blue"
+    RED = "r"
+    GREEN = "g"
+    BLUE = "b"
 
     def __init__(self):
         """
