@@ -45,17 +45,14 @@ def check_certificate(graph_to_test, coloration_to_test):
 
 
 if __name__ == "__main__":
-    my_graph = Graph()
-    my_graph.add_node("S1", ["S2", "S3", "S4"])
-    my_graph.add_node("S2", ["S3", "S4"])
-
+    my_graph = Graph("sample_graph.txt")
     nodes = my_graph.get_nodes()
 
     my_coloration = Coloration()
-    my_coloration.color_node(nodes[0], Coloration.BLUE)
-    my_coloration.color_node(nodes[1], Coloration.GREEN)
-    my_coloration.color_node(nodes[2], Coloration.RED)
-    my_coloration.color_node(nodes[3], Coloration.RED)
+    my_coloration.color_node("s1", Coloration.BLUE)
+    my_coloration.color_node("s2", Coloration.GREEN)
+    my_coloration.color_node("s3", Coloration.RED)
+    my_coloration.color_node("s4", Coloration.RED)
 
     my_graph.display_graph(my_coloration)
 
