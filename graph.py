@@ -41,7 +41,7 @@ class Graph:
 
     def add_node(self, node_name, links):
         """
-        Add a node to the graph
+        Function to add a node to the graph
         :param node_name: (string) Key name of the node
         :param links: (list of string) All the nodes linked to the created node
         """
@@ -56,9 +56,17 @@ class Graph:
             else:
                 self.graph[node].append(node_name)
 
+    def get_nodes(self):
+        """
+        Function to get all nodes of the graph
+        :return: (list) All the graph's nodes
+        """
+
+        return list(self.graph.keys())
+
     def display_graph(self):
         """
-        Display the graph in the terminal
+        Function to isplay the graph in the terminal
         """
 
         PYTHON_LOGGER.info(self.graph)
