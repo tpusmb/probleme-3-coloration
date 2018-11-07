@@ -54,6 +54,14 @@ class Coloration:
         else:
             return False
 
+    def delete_color(self, node):
+        """
+        Remove the color of the input node
+        :param node: (string) Node to remove his color
+        :return: (bool) True the color was delete else False
+        """
+        return self.coloration.pop(node, None) is not None
+
     def get_node_color(self, node):
         """
         Get color of the input node

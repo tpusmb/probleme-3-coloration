@@ -69,6 +69,53 @@ def generate_and_test(graph_to_test):
     return False
 
 
+def solve_back_tracking(graph_to_test):
+    """
+        Function to solve the 3c problem with a back tracking algorithm
+        :param graph_to_test: (Graph) The graph we want to test
+        :return: (boolean) True if there is a valid 3-coloration for this graph, False if it's not the case
+    """
+
+    def aux(current_node, explore_nodes, coloration, last_color):
+        """
+
+        :param current_node:
+        :param explore_nodes:
+        :param last_color:
+        :param coloration
+        :return:
+        """
+        # Chack if the node is not explore
+        if current_node in explore_nodes:
+            return
+
+        # Test all the colors
+        for color in [Coloration.RED, Coloration.GREEN, Coloration.BLUE]:
+
+            # Control if the neighbour color is not the same
+            if color == last_color:
+                continue
+            # Set the color
+            coloration.color_node(current_node, color)
+            # Control if the graph is ok
+            graph_is_ok = check_certificate(graph_to_test, coloration)
+            if not graph_is_ok:
+                coloration.delete_color(current_node)
+                continue
+            # If we explore all the nodes and the graph is ok we finish
+            elif graph_is_ok and graph_to_test.all_node_have_color(coloration):
+                graph_to_test.display_graph(coloration)
+                return True
+            # explore all the neighbours of the current node
+            for neighbour in graph_to_test.get_neighbour(current_node):
+                if aux(neighbour, explore_nodes + [current_node], coloration, color):
+                    return True
+            coloration.delete_color(current_node)
+        return False
+
+    return aux(graph_to_test.get_nodes()[0], [], Coloration(), None)
+
+
 if __name__ == "__main__":
     my_graph = Graph("sample_graph.txt")
     nodes = my_graph.get_nodes()
@@ -79,8 +126,8 @@ if __name__ == "__main__":
     my_coloration.color_node("s3", Coloration.RED)
     my_coloration.color_node("s4", Coloration.RED)
 
-    my_graph.display_graph(my_coloration)
+    # my_graph.display_graph(my_coloration)
 
     PYTHON_LOGGER.info(check_certificate(my_graph, my_coloration))
 
-    PYTHON_LOGGER.info(generate_and_test(my_graph))
+    PYTHON_LOGGER.info(solve_back_tracking(my_graph))
