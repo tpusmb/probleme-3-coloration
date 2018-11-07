@@ -26,20 +26,20 @@ If you want to exit your virtualenv:
 
 ### Run Specific algorithm
 
-If you want to test a specific algorithm you can enter the following command
+To run a specific algorithm
 
-    python game_dynamic.py list_point_file.txt --min-dist-bade  
-    python game_dynamic.py board_file.txt --min-dist-fast  
+
+    python problem_3_coloration.py mygraph.txt --generate-and-test
+    python problem_3_coloration.py mygraph.txt --solve-back-tracking
+
+This command will run the 2 algorithm    
+
+    python problem_3_coloration.py mygraph.txt --generate-and-test --solve-back-tracking
+
+If you want to visualise the solution you just have to add --show flag
+
+    python problem_3_coloration.py mygraph.txt --generate-and-test --solve-back-tracking --show
+
+This line will run generate and test and show the graph color. Then run solve back tracking and show the graph color
+
     
-In this 2 command we will execute the algorithm of the question a) and b)
-
-### Run a time measure
-
-If you want to do a time measure of a specific algorithm you can do the following command
-
-    python game_dynamic.py list_point_file.txt --min-dist-bade --time-measure="100 1000 10"
-
-This command will execute the algorithm of the question a). The start length will be 100 and the end length will be 1000
-then we will increment the size of the list by 10
-
-**Note** In this case the input file **list_point_file.txt** will be not used.

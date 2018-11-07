@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-Script for the problem 2 @ Blanc Swan
+Script with 2 algorithm implementation to solve 3 color problem @ Blanc Swan & LE BRAS Clément
 
 Usage:
-   euclidean_distance.py <input-file> [--generate-and-test --solve-back-tracking --show]
+   problem_3_coloration.py <input-file> [--generate-and-test --solve-back-tracking --show]
 
 Options:
     -h --help                         Show this screen.
