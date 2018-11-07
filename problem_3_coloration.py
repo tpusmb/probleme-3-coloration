@@ -2,7 +2,18 @@
 # -*- coding: utf-8 -*-
 
 """
-Main file with every problems
+Script for the problem 2 @ Blanc Swan
+
+Usage:
+   euclidean_distance.py <input-file> [--generate-and-test --solve-back-tracking --show]
+
+Options:
+    -h --help                         Show this screen.
+    <input-file>                      absolute path to the input file to read the graph
+    --generate-and-test               Function to generate all possibles coloration of a graph and check
+                                      if there is at least one valid 3-coloration
+    --solve-back-tracking             Function to solve the 3c problem with a back tracking algorithm
+    --show                            Show the load graph
 """
 
 from __future__ import absolute_import
@@ -11,6 +22,7 @@ from coloration import Coloration
 import os
 import itertools
 import logging.handlers
+from docopt import docopt
 
 PYTHON_LOGGER = logging.getLogger(__name__)
 if not os.path.exists("log"):
@@ -65,8 +77,8 @@ def generate_and_test(graph_to_test):
         for node, color in zip(graph_to_test.get_nodes(), combination):
             coloration.color_node(node, color)
         if check_certificate(graph_to_test, coloration):
-            return True
-    return False
+            return True, coloration
+    return False, coloration
 
 
 def solve_back_tracking(graph_to_test):
@@ -104,31 +116,30 @@ def solve_back_tracking(graph_to_test):
                 continue
             # If we explore all the nodes and the graph is ok we finish
             elif graph_is_ok and graph_to_test.all_node_have_color(coloration):
-                graph_to_test.display_graph(coloration)
                 return True
             # explore all the neighbours of the current node
             for neighbour in graph_to_test.get_neighbour(current_node):
                 # If the aux function found a solution we have finish
                 if aux(neighbour, explore_nodes + [current_node], coloration, color):
-                    return True
+                    return True, coloration
             coloration.delete_color(current_node)
-        return False
+        return False, coloration
 
     return aux(graph_to_test.get_nodes()[0], [], Coloration(), None)
 
 
 if __name__ == "__main__":
-    my_graph = Graph("sample_graph.txt")
-    nodes = my_graph.get_nodes()
+    arguments = docopt(__doc__)
+    my_graph = Graph(arguments["<input-file>"])
 
-    my_coloration = Coloration()
-    my_coloration.color_node("s1", Coloration.BLUE)
-    my_coloration.color_node("s2", Coloration.GREEN)
-    my_coloration.color_node("s3", Coloration.RED)
-    my_coloration.color_node("s4", Coloration.RED)
+    if arguments["--generate-and-test"]:
+        res, coloration = generate_and_test(my_graph)
+        PYTHON_LOGGER.info("Generate and test: {}".format(res))
+        if arguments["--show"]:
+            my_graph.display_graph(coloration)
 
-    my_graph.display_graph(my_coloration)
-
-    PYTHON_LOGGER.info(check_certificate(my_graph, my_coloration))
-
-    PYTHON_LOGGER.info(solve_back_tracking(my_graph))
+    if arguments["--solve-back-tracking"]:
+        res, coloration = solve_back_tracking(my_graph)
+        PYTHON_LOGGER.info("Back tracking algorithm: {}".format(res))
+        if arguments["--show"]:
+            my_graph.display_graph(coloration)
