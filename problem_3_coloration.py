@@ -78,12 +78,12 @@ def solve_back_tracking(graph_to_test):
 
     def aux(current_node, explore_nodes, coloration, last_color):
         """
-
-        :param current_node:
-        :param explore_nodes:
-        :param last_color:
-        :param coloration
-        :return:
+        Aux function to implement the back tracking algorithm
+        :param current_node: (string) Current explore node
+        :param explore_nodes: (list of string) List of all the explore nodes
+        :param last_color: (string) last color used by the neighbour
+        :param coloration: (Coloration) current coloration state of the graph
+        :return: (boolean) True we found a solution else False
         """
         # Chack if the node is not explore
         if current_node in explore_nodes:
@@ -108,6 +108,7 @@ def solve_back_tracking(graph_to_test):
                 return True
             # explore all the neighbours of the current node
             for neighbour in graph_to_test.get_neighbour(current_node):
+                # If the aux function found a solution we have finish
                 if aux(neighbour, explore_nodes + [current_node], coloration, color):
                     return True
             coloration.delete_color(current_node)
@@ -126,7 +127,7 @@ if __name__ == "__main__":
     my_coloration.color_node("s3", Coloration.RED)
     my_coloration.color_node("s4", Coloration.RED)
 
-    # my_graph.display_graph(my_coloration)
+    my_graph.display_graph(my_coloration)
 
     PYTHON_LOGGER.info(check_certificate(my_graph, my_coloration))
 

@@ -86,11 +86,10 @@ class Graph:
 
     def all_node_have_color(self, coloration):
         """
-
-        :param coloration:
-        :return:
+        Function to now if all the nodes have a coloration
+        :param coloration: (Coloration) Coloration of the nodes
+        :return: (boolean) True all the nodes have a color else False
         """
-
         for node in self.get_nodes():
             if coloration.get_node_color(node) is None:
                 return False
