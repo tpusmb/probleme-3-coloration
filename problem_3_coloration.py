@@ -120,12 +120,14 @@ def solve_back_tracking(graph_to_test):
             # explore all the neighbours of the current node
             for neighbour in graph_to_test.get_neighbour(current_node):
                 # If the aux function found a solution we have finish
-                if aux(neighbour, explore_nodes + [current_node], coloration, color) == True:
-                    return True, coloration
+                if aux(neighbour, explore_nodes + [current_node], coloration, color):
+                    return True
             coloration.delete_color(current_node)
-        return False, coloration
+        return False
 
-    return aux(graph_to_test.get_nodes()[0], [], Coloration(), None)
+    coloration = Coloration()
+    res = aux(graph_to_test.get_nodes()[0], [], coloration, None)
+    return res, coloration
 
 
 if __name__ == "__main__":
