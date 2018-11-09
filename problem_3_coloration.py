@@ -120,7 +120,7 @@ def solve_back_tracking(graph_to_test):
             # explore all the neighbours of the current node
             for neighbour in graph_to_test.get_neighbour(current_node):
                 # If the aux function found a solution we have finish
-                if aux(neighbour, explore_nodes + [current_node], coloration, color):
+                if aux(neighbour, explore_nodes + [current_node], coloration, color) == True:
                     return True, coloration
             coloration.delete_color(current_node)
         return False, coloration
@@ -131,15 +131,16 @@ def solve_back_tracking(graph_to_test):
 if __name__ == "__main__":
     arguments = docopt(__doc__)
     my_graph = Graph(arguments["<input-file>"])
-
-    if arguments["--generate-and-test"]:
-        res, coloration = generate_and_test(my_graph)
-        PYTHON_LOGGER.info("Generate and test: {}".format(res))
-        if arguments["--show"]:
-            my_graph.display_graph(coloration)
-
-    if arguments["--solve-back-tracking"]:
-        res, coloration = solve_back_tracking(my_graph)
-        PYTHON_LOGGER.info("Back tracking algorithm: {}".format(res))
-        if arguments["--show"]:
-            my_graph.display_graph(coloration)
+    res, coloration = solve_back_tracking(my_graph)
+    print(res)
+    # if arguments["--generate-and-test"]:
+    #     res, coloration = generate_and_test(my_graph)
+    #     PYTHON_LOGGER.info("Generate and test: {}".format(res))
+    #     if arguments["--show"]:
+    #         my_graph.display_graph(coloration)
+    #
+    # if arguments["--solve-back-tracking"]:
+    #     res, coloration = solve_back_tracking(my_graph)
+    #     PYTHON_LOGGER.info("Back tracking algorithm: {}".format(res))
+    #     if arguments["--show"]:
+    #         my_graph.display_graph(coloration)
