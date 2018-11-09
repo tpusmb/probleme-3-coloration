@@ -133,16 +133,15 @@ def solve_back_tracking(graph_to_test):
 if __name__ == "__main__":
     arguments = docopt(__doc__)
     my_graph = Graph(arguments["<input-file>"])
-    res, coloration = solve_back_tracking(my_graph)
-    print(res)
-    # if arguments["--generate-and-test"]:
-    #     res, coloration = generate_and_test(my_graph)
-    #     PYTHON_LOGGER.info("Generate and test: {}".format(res))
-    #     if arguments["--show"]:
-    #         my_graph.display_graph(coloration)
-    #
-    # if arguments["--solve-back-tracking"]:
-    #     res, coloration = solve_back_tracking(my_graph)
-    #     PYTHON_LOGGER.info("Back tracking algorithm: {}".format(res))
-    #     if arguments["--show"]:
-    #         my_graph.display_graph(coloration)
+
+    if arguments["--generate-and-test"]:
+        res, coloration = generate_and_test(my_graph)
+        PYTHON_LOGGER.info("Generate and test: {}".format(res))
+        if arguments["--show"]:
+            my_graph.display_graph(coloration)
+
+    if arguments["--solve-back-tracking"]:
+        res, coloration = solve_back_tracking(my_graph)
+        PYTHON_LOGGER.info("Back tracking algorithm: {}".format(res))
+        if arguments["--show"]:
+            my_graph.display_graph(coloration)
