@@ -73,9 +73,31 @@ class Graph:
 
         return list(self.graph.keys())
 
+    def get_neighbour(self, node):
+        """
+        Get allt he neighbour of the input node
+        :param node: (string) Node to get all his neighbour
+        :return: (list of string) all the neighbour of the input node, empty list if the node not existe
+        """
+        try:
+            return self.graph[node]
+        except Exception:
+            return []
+
+    def all_node_have_color(self, coloration):
+        """
+        Function to now if all the nodes have a coloration
+        :param coloration: (Coloration) Coloration of the nodes
+        :return: (boolean) True all the nodes have a color else False
+        """
+        for node in self.get_nodes():
+            if coloration.get_node_color(node) is None:
+                return False
+        return True
+
     def display_graph(self, coloration):
         """
-        Display the in window
+        Display the graph in window. Display the node in gray if is have no attributed color
         :param coloration: (coloration) coloration for each node
         """
         graph_nx = nx.Graph()
@@ -85,7 +107,8 @@ class Graph:
             for neighbour in self.graph[node]:
                 graph_nx.add_edge(node, neighbour)
             labels[node] = node
-            node_color.append(coloration.coloration[node])
+            color = 'gray' if coloration.get_node_color(node) is None else coloration.get_node_color(node)
+            node_color.append(color)
         nx.draw(graph_nx, node_color=node_color, labels=labels)
         plt.axis('off')
         plt.show()
@@ -96,6 +119,4 @@ if __name__ == "__main__":
     coloration = Coloration()
     coloration.color_node("s1", coloration.BLUE)
     coloration.color_node("s2", coloration.GREEN)
-    coloration.color_node("s3", coloration.RED)
-    coloration.color_node("s4", coloration.RED)
     g.display_graph(coloration)

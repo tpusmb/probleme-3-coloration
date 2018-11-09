@@ -54,6 +54,22 @@ class Coloration:
         else:
             return False
 
+    def delete_color(self, node):
+        """
+        Remove the color of the input node
+        :param node: (string) Node to remove his color
+        :return: (bool) True the color was delete else False
+        """
+        return self.coloration.pop(node, None) is not None
+
+    def get_node_color(self, node):
+        """
+        Get color of the input node
+        :param node: (String) name of the node you want to get the color
+        :return: (string) 'r' or 'g' or 'b' if the node not exist we return None
+        """
+        return None if node not in self.coloration else self.coloration[node]
+
 
 if __name__ == "__main__":
     pass
