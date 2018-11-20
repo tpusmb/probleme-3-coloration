@@ -109,14 +109,15 @@ class Graph:
             labels[node] = node
             color = 'gray' if coloration.get_node_color(node) is None else coloration.get_node_color(node)
             node_color.append(color)
-        nx.draw(graph_nx, node_color=node_color, labels=labels)
+        nx.draw(graph_nx, node_color=node_color, with_labels=True)
         plt.axis('off')
         plt.show()
 
 
 if __name__ == "__main__":
-    g = Graph("sample_graph.txt")
+    g = Graph("instances/3c_faux.txt")
     coloration = Coloration()
     coloration.color_node("s1", coloration.BLUE)
     coloration.color_node("s2", coloration.GREEN)
+    coloration.color_node("s3", coloration.RED)
     g.display_graph(coloration)
