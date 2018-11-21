@@ -102,14 +102,12 @@ class Graph:
         """
         graph_nx = nx.Graph()
         labels = {}
-        node_color = []
         for node in self.graph:
             for neighbour in self.graph[node]:
                 graph_nx.add_edge(node, neighbour)
-            labels[node] = node
             color = 'gray' if coloration.get_node_color(node) is None else coloration.get_node_color(node)
-            node_color.append(color)
-        nx.draw(graph_nx, node_color=node_color, with_labels=True)
+            labels[node] = node + " " + color
+        nx.draw(graph_nx, with_labels=True, labels=labels)
         plt.axis('off')
         plt.show()
 
